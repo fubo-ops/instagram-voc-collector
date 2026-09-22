@@ -13,7 +13,7 @@ class InstagramCdpContractTests(unittest.TestCase):
         args = automation.parser().parse_args(['collect', '--asin', 'B0787FVCBW'])
         self.assertEqual(args.transport, 'cdp')
         self.assertEqual(args.cdp_url, 'http://127.0.0.1:9333')
-        self.assertTrue(args.cdp_profile_dir.endswith('outputs\\instagram-cdp-profile'))
+        self.assertEqual(Path(args.cdp_profile_dir).parts[-2:], ('outputs', 'instagram-cdp-profile'))
 
     def test_extension_remains_an_explicit_compatibility_mode(self):
         args = automation.parser().parse_args(['collect', '--asin', 'B0787FVCBW', '--transport', 'extension'])
