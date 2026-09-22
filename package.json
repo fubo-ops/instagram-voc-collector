@@ -1,0 +1,14 @@
+{
+  "name": "instagram-voc-collector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ASIN-driven Instagram Post and Reel VOC collector for Codex",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/*.cjs",
+    "check": "node --check scripts/instagram_playwright_collector.cjs && node --check extension/amazon_capture.js && node --check extension/bridge_core.js && node --check extension/capture_core.js && node --check extension/capture.js && node --check extension/continuous_capture.js && node --check extension/discovery_capture.js && node --check extension/media_metadata.js && node --check extension/media_prepare.js && node --check extension/popup.js && node --check extension/service_worker.js && node --check extension/wake.js"
+  },
+  "dependencies": {
+    "playwright-core": "^1.63.0"
+  }
+}

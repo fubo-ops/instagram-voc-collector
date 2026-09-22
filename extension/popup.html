@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>Instagram VOC</title>
+<style>
+body{font:14px system-ui;width:300px;padding:12px}button,input{box-sizing:border-box;padding:8px;margin:4px 0;width:100%}
+.row{display:flex;gap:8px}.row button{width:50%}label{display:block;margin-top:8px}#status{white-space:pre-wrap;margin-top:10px;color:#333}
+</style>
+<body><strong>Instagram 可见评论采集</strong>
+<p>仅处理当前帖子或 Reel。持续模式会展开回复、滚动，并在达到边界后自动下载。</p>
+<button id="capture">单次采集并下载</button>
+<label>目标评论数（0 = 不设目标）<input id="targetComments" type="number" min="0" max="5000" value="200"></label>
+<div class="row"><button id="startContinuous">开始持续采集</button><button id="stopContinuous">停止并保存</button></div>
+<div id="status">就绪</div><script src="popup.js"></script></body></html>

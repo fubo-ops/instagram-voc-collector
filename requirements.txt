@@ -1,0 +1,2 @@
+# Runtime logic uses the Python standard library.
+# Browser control is provided by the Node.js playwright dependency.

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "instagram-voc-collector"
+version = "1.0.0"
+description = "ASIN-driven Instagram Post and Reel VOC collector for Codex"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "fubo-ops"}]
+
+[project.urls]
+Repository = "https://github.com/fubo-ops/instagram-voc-collector"
+
+[tool.setuptools]
+package-dir = {"" = "scripts"}
+py-modules = ["instagram_automation", "instagram_collector", "instagram_discovery", "xlsx_writer"]

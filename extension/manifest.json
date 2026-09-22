@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Instagram VOC Passive Collector",
+  "version": "2.5.16",
+  "description": "Passive browser worker for localhost-controlled, ASIN-driven Instagram VOC discovery and visible comment collection.",
+  "permissions": ["activeTab", "tabs", "scripting", "downloads", "alarms", "storage"],
+  "host_permissions": [
+    "https://www.instagram.com/*",
+    "https://www.amazon.com/*",
+    "https://www.google.com/*",
+    "https://www.bing.com/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {"service_worker": "service_worker.js"},
+  "content_scripts": [{
+    "matches": ["https://www.instagram.com/*"],
+    "js": ["wake.js"],
+    "run_at": "document_start"
+  }],
+  "action": {"default_popup": "popup.html"}
+}

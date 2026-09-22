@@ -1,0 +1,4 @@
+interface:
+  display_name: "Instagram VOC Collector"
+  short_description: "ASIN-only Instagram discovery and visible-comment automation."
+  default_prompt: "Use $instagram-voc-collector with my ASINs to automatically discover relevant Instagram posts/Reels, score candidates, collect visible comments/replies through logged-in Chrome, resume from checkpoints, and export audited raw results."

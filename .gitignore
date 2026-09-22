@@ -1,0 +1,15 @@
+outputs/
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+*.xlsx
+*.jsonl
+*.log
+.DS_Store
+Thumbs.db
