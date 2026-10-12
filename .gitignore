@@ -11,5 +11,6 @@ dist/
 *.xlsx
 *.jsonl
 *.log
+.current-run-path.txt
 .DS_Store
 Thumbs.db

@@ -39,6 +39,14 @@ python scripts/instagram_automation.py smoke --transport cdp --smoke-url "https:
 
 A direct URL is smoke/debug input, not the formal discovery entry point. The legacy `instagram_collector.py plan|preflight|ingest` commands remain available for offline fixture import.
 
+For a user-owned ordinary Chrome tab already showing a Reel, OpenCLI can open the current visible comment panel without the extension:
+
+```powershell
+python scripts/instagram_opencli.py open-comments --session instagram-voc --shortcode POST_CODE
+```
+
+The helper verifies URL/canonical/`og:url` shortcode identity, targets only the in-viewport Reel comment button, waits 3–6 seconds around interactions, verifies the panel state, and uses keyboard activation plus a verified Windows native click fallback when CDP input lacks page user activation.
+
 ## Invariants
 
 - Raw delivery contains comment rows only. Preserve exact visible text, stable comment IDs, reply lineage, author/username, visible timestamps/labels, likes, media URL/shortcode/type, capture time, ASIN/query provenance, and field warnings.
@@ -57,3 +65,5 @@ A direct URL is smoke/debug input, not the formal discovery entry point. The leg
 The run directory contains `raw_comments.jsonl`, `raw_comments.csv`, `instagram_raw_comments.xlsx`, `manifest.json`, `checkpoint.json`, `automation_checkpoint.json`, `post_audit.csv`, `post_audit.json`, `query_plan.json`, `conversation_map.json`, `media_candidates.json`, and per-media evidence under `evidence/<shortcode>/`.
 
 The Excel workbook has `Raw_Comments`, `Media_Audit`, `Query_Plan`, `Run_Summary`, and `Quality_Gate`. `PASS` requires verified complete coverage; bounded visible-DOM collections normally remain `PARTIAL` even when the requested target is reached.
+
+For this local workspace, copy only the finished Excel workbook to `D:\Project\2026\SKILL\IG评论采集`. Name it `<ASIN>_IG评论_<唯一评论数>条_<YYYYMMDD>.xlsx`; for multiple ASINs use `MULTI_<ASIN数量>ASIN_IG评论_<唯一评论数>条_<YYYYMMDD>.xlsx`. Keep JSON, CSV, checkpoints, evidence, and audits in the original run directory, and never overwrite an existing delivery workbook.

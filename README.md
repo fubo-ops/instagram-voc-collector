@@ -81,6 +81,16 @@ python scripts\instagram_automation.py smoke `
   --out-dir outputs\smoke
 ```
 
+普通 Chrome 已登录标签页可用 OpenCLI 自动打开当前 Reel 的评论面板：
+
+```powershell
+python scripts\instagram_opencli.py open-comments `
+  --session instagram-voc `
+  --shortcode POST_CODE
+```
+
+该命令只选择当前视口中的评论按钮，点击前交叉校验当前 URL、canonical 和 `og:url`，并在操作间保持 3–6 秒随机间隔。如 Instagram 拒绝 CDP 鼠标/键盘激活，Windows 会对当前 Instagram Chrome 窗口执行一次经身份校验的原生点击，不读取 Cookie 或 Token。OpenCLI 仍是普通 Chrome 单帖调试模式；正式 ASIN 批量流程默认使用 CDP。
+
 ## 输出
 
 每个运行目录包含原始 JSONL/CSV、checkpoint、manifest、候选与媒体审计文件，以及 `instagram_raw_comments.xlsx`。Excel 固定包含：
@@ -90,6 +100,8 @@ python scripts\instagram_automation.py smoke `
 - `Query_Plan`
 - `Run_Summary`
 - `Quality_Gate`
+
+本机最终交付统一放到 `D:\Project\2026\SKILL\IG评论采集`，单 ASIN 文件名为 `<ASIN>_IG评论_<唯一评论数>条_<YYYYMMDD>.xlsx`。该目录只放最终 Excel；JSON、CSV、checkpoint 和 evidence 留在原运行目录。
 
 页面显示的评论总数只进入审计字段，不会被当作实际采集数。`comment_id` 按文本保存，回复保留 `parent_comment_id`。
 
