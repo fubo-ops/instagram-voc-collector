@@ -14,3 +14,20 @@ dist/
 .current-run-path.txt
 .DS_Store
 Thumbs.db
+
+# Credentials, browser state and additional local run artifacts
+.env
+.env.*
+.runtime/
+runs/
+profiles/
+*Profile/
+SingletonCookie
+SingletonLock
+SingletonSocket
+extension_runtime.json
+*.csv
+*.har
+trace.zip
+playwright-report/
+test-results/
