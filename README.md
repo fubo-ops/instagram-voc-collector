@@ -1,5 +1,12 @@
 # Instagram VOC 评论采集器
 
+## 一眼看懂
+
+- 这是什么：按商品编号找 Instagram 帖子并采公开评论。
+- 什么时候用：想看看图文和短视频底下怎么聊这款商品时。
+- 给它什么：商品编号，和一个已登录的 Chrome 窗口。
+- 它给你什么：评论明细和五张表 Excel，含媒体与质量记录。
+
 ## 项目简介
 
 `instagram-voc-collector` 是由 Amazon ASIN 驱动的 Instagram Post/Reel 公开评论采集工具和 Agent Skill。正式流程从可见 Amazon 商品页面构建商品画像，发现并筛选相关媒体，再通过已登录 Chrome 的 CDP 会话读取实际渲染的评论和回复，输出带审计信息的 JSONL、CSV 与 Excel。
