@@ -1,6 +1,9 @@
 import importlib.util
+import os
+import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / 'scripts' / 'instagram_opencli.py'
@@ -42,10 +45,28 @@ class InstagramOpenCliTests(unittest.TestCase):
             MODULE.validate_identity(probe, 'ABC_123')
 
     def test_windows_npm_wrapper_uses_node_entrypoint(self):
-        wrapper = Path.home() / 'AppData' / 'Roaming' / 'npm' / 'opencli.cmd'
-        prefix = MODULE.opencli_command_prefix(wrapper, platform_name='nt')
-        self.assertEqual(Path(prefix[-1]).name, 'main.js')
-        self.assertNotEqual(Path(prefix[0]).suffix.lower(), '.cmd')
+        with tempfile.TemporaryDirectory() as temp_dir:
+            appdata = Path(temp_dir) / 'AppData' / 'Roaming'
+            npm_dir = appdata / 'npm'
+            wrapper = npm_dir / 'opencli.cmd'
+            entry = npm_dir / 'node_modules' / '@jackwener' / 'opencli' / 'dist' / 'src' / 'main.js'
+            entry.parent.mkdir(parents=True)
+            wrapper.write_text('', encoding='utf-8')
+            entry.write_text('', encoding='utf-8')
+            (npm_dir / 'node.exe').write_text('', encoding='utf-8')
+            with mock.patch.dict(os.environ, {'APPDATA': str(appdata)}):
+                prefix = MODULE.opencli_command_prefix(wrapper, platform_name='nt')
+            self.assertEqual(Path(prefix[-1]), entry)
+            self.assertNotEqual(Path(prefix[0]).suffix.lower(), '.cmd')
+
+    def test_windows_npm_wrapper_falls_back_without_node_entrypoint(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            npm_dir = Path(temp_dir) / 'npm'
+            wrapper = npm_dir / 'opencli.cmd'
+            npm_dir.mkdir(parents=True)
+            wrapper.write_text('', encoding='utf-8')
+            prefix = MODULE.opencli_command_prefix(wrapper, platform_name='nt')
+            self.assertEqual(prefix, [str(wrapper)])
 
     def test_native_click_point_accounts_for_browser_chrome(self):
         probe = {'viewport': {'outer_width': 1920, 'outer_height': 1080,
