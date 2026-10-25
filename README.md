@@ -9,9 +9,9 @@
 
 ## 项目简介
 
-`instagram-voc-collector` 是由 Amazon ASIN 驱动的 Instagram Post/Reel 公开评论采集工具和 Agent Skill。正式流程从可见 Amazon 商品页面构建商品画像，发现并筛选相关媒体，再通过已登录 Chrome 的 CDP 会话读取实际渲染的评论和回复，输出带审计信息的 JSONL、CSV 与 Excel。
+`instagram-voc-collector` 是由 Amazon ASIN 驱动的 Instagram Post/Reel 公开评论采集工具和 Agent Skill。正式流程从可见 Amazon 商品页面构建商品画像，发现并筛选相关媒体，再通过已登录 Chrome 的 CDP（Chrome 调试协议）会话读取实际渲染的评论和回复，输出带审计信息的 JSONL、CSV 与 Excel。
 
-默认运行路径是 Python 编排、Node.js Playwright 和 Chrome CDP，仓库中的扩展保留为显式选择的兼容方式。仓库不调用 Instagram 官方 API、不导出登录凭据，也不提供 LLM 语义判断或托管服务；采集结果只代表当前可见 DOM 的范围，不等于平台全部评论。
+默认运行路径是 Python 编排、Node.js Playwright 和 Chrome CDP（Chrome 调试协议），仓库中的扩展保留为显式选择的兼容方式。仓库不调用 Instagram 官方 API、不导出登录凭据，也不提供 LLM（大模型）语义判断或托管服务；采集结果只代表当前可见 DOM（页面结构）的范围，不等于平台全部评论。
 
 ## 核心功能
 
@@ -173,7 +173,7 @@ instagram-voc-collector/
 ### Phase 2: 采集与身份核对
 
 - ✅ 规则评分分级（HIGH / MEDIUM / LOW）
-- ✅ CDP 会话内评论与回复串行展开
+- ✅ CDP（Chrome 调试协议）会话内评论与回复串行展开
 - ✅ 页面 URL、canonical、`og:url` 身份核对
 
 ### Phase 3: 输出与恢复
